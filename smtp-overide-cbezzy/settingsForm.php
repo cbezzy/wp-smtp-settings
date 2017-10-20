@@ -6,7 +6,7 @@
                     <td width="100"><b>Server</b></td>
                     <td><input style="width:95%" type="text" name="smtp_override_cbezzy_server" value="<?= smtp_clean_fetch_option_cbezzy_1507709700( 'smtp_override_cbezzy_server' , '' ) ?>" /></td>
                     <td width="150" align="right" ><b>Port</b></td>
-                    <td><input style="width:95%" type="text" name="smtp_override_cbezzy_port"   value="<?= smtp_clean_fetch_option_cbezzy_1507709700( 'smtp_override_cbezzy_port'   , '' ) ?>" /></td>
+                    <td><input style="width:95%" type="number" name="smtp_override_cbezzy_port" value="<?= smtp_clean_fetch_option_cbezzy_1507709700( 'smtp_override_cbezzy_port'   , '25' , 'int' ) ?>" /></td>
 
                 </tr>
                 <tr>
@@ -21,7 +21,7 @@
                         <label for="bypassSSL"><b>Allow self signed SSL:</b></label>
                     </td>
                     <td>
-                        <input id="bypassSSL" type="checkbox" <?= ( smtp_clean_fetch_option_cbezzy_1507709700( 'smtp_override_cbezzy_bypass_ssl_verify' , '' ) == '1' ? 'checked' : '' ) ?> name="smtp_override_cbezzy_bypass_ssl_verify" value="1" />
+                        <input id="bypassSSL" type="checkbox" <?= ( (int) smtp_clean_fetch_option_cbezzy_1507709700( 'smtp_override_cbezzy_bypass_ssl_verify' , 0 , 'int' ) == '1' ? 'checked' : '' ) ?> name="smtp_override_cbezzy_bypass_ssl_verify" value="1" />
                     </td>
                 </tr>
                 <tr><td colspan="4"><hr /></td></tr>
@@ -29,24 +29,24 @@
                     <td><b>Username</b></td>
                     <td><input style="width:95%" type="text"     name="smtp_override_cbezzy_username" value="<?= smtp_clean_fetch_option_cbezzy_1507709700( 'smtp_override_cbezzy_username' , '' ) ?>" /></td>
                     <td align="right"><b>Password</b></td>
-                    <td><input style="width:95%" type="password" name="smtp_override_cbezzy_password" value="<?= base64_decode( get_option( 'smtp_override_cbezzy_password' , '' ) ) ?>" /></td>
+                    <td><input style="width:95%" type="password" name="smtp_override_cbezzy_password" value="<?= base64_decode( smtp_clean_fetch_option_cbezzy_1507709700( 'smtp_override_cbezzy_password' , '' ) ) ?>" /></td>
 
                 </tr>
                 <tr><td colspan="4"><hr /></td></tr>
                 <tr>
                     <td><b>From address</b></td>
-                    <td><input style="width:95%" type="text" name="smtp_override_cbezzy_from_address"  value="<?= smtp_clean_fetch_option_cbezzy_1507709700('smtp_override_cbezzy_from_address', '') ?>" /></td>
+                    <td><input style="width:95%" type="email" name="smtp_override_cbezzy_from_address"  value="<?= smtp_clean_fetch_option_cbezzy_1507709700('smtp_override_cbezzy_from_address', '' , 'email' ) ?>" /></td>
                     <td align="right"><b>From name</b></td>
-                    <td><input style="width:95%" type="text" name="smtp_override_cbezzy_from_name"     value="<?= smtp_clean_fetch_option_cbezzy_1507709700('smtp_override_cbezzy_from_name'   , '') ?>" /></td>
+                    <td><input style="width:95%" type="text" name="smtp_override_cbezzy_from_name"     value="<?= smtp_clean_fetch_option_cbezzy_1507709700('smtp_override_cbezzy_from_name'   , '' ) ?>" /></td>
 
                 </tr>
                 <tr>
                     <td><b>Reply to</b></td>
-                    <td><input style="width:95%" type="text" name="smtp_override_cbezzy_reply_to"      value="<?= smtp_clean_fetch_option_cbezzy_1507709700('smtp_override_cbezzy_reply_to'    , '') ?>" /></td>
+                    <td><input style="width:95%" type="email" name="smtp_override_cbezzy_reply_to"      value="<?= smtp_clean_fetch_option_cbezzy_1507709700('smtp_override_cbezzy_reply_to'    , '' , 'email' ) ?>" /></td>
                 </tr>
                 <tr>
                     <td><b>Test Email Address</b></td>
-                    <td><input type="email" name="smtp_override_cbezzy_default_test_email" value="<?= get_option('smtp_override_cbezzy_default_test_email', '') ?>" style="width:95%" /></td>
+                    <td><input type="email" name="smtp_override_cbezzy_default_test_email" value="<?= get_option('smtp_override_cbezzy_default_test_email', '' , 'email' ) ?>" style="width:95%" /></td>
                     <td colspan="2"><input style="width:100%" type="submit" name="saveAndSendTest" value="Save and send a test email" class="button button-primary" /></td>
                 </tr>
                 <tr> 
