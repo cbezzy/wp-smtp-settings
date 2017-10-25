@@ -1,4 +1,5 @@
     <form id="smtp_override_cbezzy_form" method="post"> 
+        <?php wp_nonce_field( 'smtp_override_cbezzy_form_no_once' );  ?>
         <h2>SMTP SERVER SETTINGS :</h2>
         <blockquote>
             <table style="width:100%" cellpadding="10">

@@ -34,8 +34,11 @@ function smtp_override_cbezzy_menu_1507709700() {
  * settingsForm.php contains the form that is displayed in the admin screen 
  */
 function settings_view_cbezzy_1507709700(){ 
-    if( isset( $_POST ) ){ smtp_override_cbezzy_save_setttings_1507709700(); }  
-    require_once( 'settingsForm.php' );
+    // check user permissions
+    if( current_user_can( 'manage_options' ) ){
+        if( isset( $_POST ) ){ smtp_override_cbezzy_save_setttings_1507709700(); }  
+        require_once( 'settingsForm.php' );
+    }
 }
 
 add_action( 'phpmailer_init', 'smtp_override_cbezzy_1507709700' );
@@ -76,13 +79,14 @@ function smtp_override_cbezzy_1507709700( $phpmailer ){
  * 
  * this saves the smtp settings to the wordpress database 
  */
-function smtp_override_cbezzy_save_setttings_1507709700(){
+function smtp_override_cbezzy_save_setttings_1507709700(){ 
     if( isset( $_POST ) && is_array( $_POST ) && sizeof( $_POST ) > 0 )
-    {  
+    {   
         foreach( $_POST as $name=>$value ) 
         {
             $name = trim( sanitize_text_field( $name  ) );  
             if( substr( $name , 0 , 20 ) === 'smtp_override_cbezzy' ){  
+                check_admin_referer( 'smtp_override_cbezzy_form_no_once' );
                 /* clean user input */
                 if(     $name === 'smtp_override_cbezzy_from_address' || $name === 'smtp_override_cbezzy_reply_to' || $name === 'smtp_override_cbezzy_default_test_email' )
                     { $value = sanitize_email( $value ); }  /* clean email addresses */
@@ -92,8 +96,8 @@ function smtp_override_cbezzy_save_setttings_1507709700(){
                     { $value = smtp_encode_password_cbezzy_1507709700($value); } /* base64_encode the password (not for security, purely viusal) */
                 else
                     { $value = trim( sanitize_text_field( $value ) ); } 
-                // update with the clean input
-                update_option( $name , $value ); 
+                // update with the clean input 
+                update_option( $name , $value );  
             } 
             if( !isset( $_POST[ 'smtp_override_bypass_ssl_verify_cbezzy' ] ) )
                 { update_option( 'smtp_override_bypass_ssl_verify_cbezzy' , 0 ); }
