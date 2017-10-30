@@ -82,11 +82,11 @@ function smtp_override_cbezzy_1507709700( $phpmailer ){
 function smtp_override_cbezzy_save_setttings_1507709700(){ 
     if( isset( $_POST ) && is_array( $_POST ) && sizeof( $_POST ) > 0 )
     {   
+        check_admin_referer( 'smtp_override_cbezzy_form_no_once' );
         foreach( $_POST as $name=>$value ) 
         {
             $name = trim( sanitize_text_field( $name  ) );  
-            if( substr( $name , 0 , 20 ) === 'smtp_override_cbezzy' ){  
-                check_admin_referer( 'smtp_override_cbezzy_form_no_once' );
+            if( substr( $name , 0 , 20 ) === 'smtp_override_cbezzy' ){   
                 /* clean user input */
                 if(     $name === 'smtp_override_cbezzy_from_address' || $name === 'smtp_override_cbezzy_reply_to' || $name === 'smtp_override_cbezzy_default_test_email' )
                     { $value = sanitize_email( $value ); }  /* clean email addresses */
